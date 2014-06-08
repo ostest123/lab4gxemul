@@ -34,6 +34,17 @@ void mips_init()
 	//env_run(&envs[1]);
 	
 	printf("Fmars_init success\n");
+	//For your grade,don't delete these.
+//Just for the test.
+//------------
+#ifdef FTEST
+FTEST();
+#endif
+
+#ifdef PTEST
+ENV_CREATE(PTEST);
+#endif
+//-----------
 	while(1);
 	panic("init.c:\tend of mips_init() reached!");
 }
