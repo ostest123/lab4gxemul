@@ -8,6 +8,9 @@
 extern char aoutcode[];
 extern char boutcode[];
 
+#define ENV_CREATE_STR(x) ENV_CREATE_USER(x)
+#define ENV_CREATE_USER(x) ENV_CREATE_USER1(user_##x)
+#define ENV_CREATE_USER1(x) ENV_CREATE(x)
 void mips_init()
 {
 	printf("init.c:\tmips_init() is called\n");
@@ -22,7 +25,10 @@ void mips_init()
 	//ENV_CREATE(user_pt1);
 	ENV_CREATE(user_idle);
 	//ENV_CREATE(user_fktest);
-	ENV_CREATE(user_pingpong);
+	//ENV_CREATE(user_pingpong);
+	#ifdef PTEST
+ENV_CREATE(PTEST);
+#endif
 	//ENV_CREATE(user_testfdsharing);	
 	//ENV_CREATE(user_testspawn);
 	//ENV_CREATE(user_testpipe);
@@ -41,9 +47,7 @@ void mips_init()
 FTEST();
 #endif
 
-#ifdef PTEST
-ENV_CREATE(PTEST);
-#endif
+
 //-----------
 	while(1);
 	panic("init.c:\tend of mips_init() reached!");
